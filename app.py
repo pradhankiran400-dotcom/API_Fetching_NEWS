@@ -7,17 +7,17 @@ from bs4 import BeautifulSoup
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
-BBC_URL = "https://www.bbc.com"
+dharitri_URL = "https://www.dharitri.com/"
 
 def scrap_news():
     news = [] 
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-        response = requests.get(BBC_URL, headers=headers)
+        response = requests.get(dharitri_URL, headers=headers)
         soup = BeautifulSoup(response.content, 'html.parser')
-        headlines = soup.find_all('h2') or soup.find_all('h3')
+        headlines = soup.find_all('p') or soup.find_all('h3')
         
-        for element in headlines[:10]: 
+        for element in headlines[:21]: 
             title = element.text.strip()
             
             a_tag = element.find_parent('a') or element.find('a') or element.find_next_sibling('a')
@@ -26,7 +26,7 @@ def scrap_news():
                 link = a_tag['href']
                 
                 if link.startswith('/'):
-                    link = BBC_URL + link
+                    link = dharitri_URL + link
                     
                 if not any(item['title'] == title for item in news):
                     news.append({'title': title, 'link': link})
