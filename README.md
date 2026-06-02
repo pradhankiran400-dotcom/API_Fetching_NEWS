@@ -23,6 +23,7 @@ A modern, fast, and lightweight web application built using **FastAPI** that dyn
 ```text
 API_FETCHING/
 │
+├──README.md
 ├── templates/              # HTML Templates Directory
 │   └── dashboard.html      # Frontend UI layout
 ├── app.py                  # Main FastAPI Application & Scraper Logic
